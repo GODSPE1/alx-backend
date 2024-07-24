@@ -27,7 +27,7 @@ class FIFOCache(BaseCaching):
         """Return the value associated with the
         given key in the cache data dictionary
         """
-        if key is None or key not in self.cache_data:
-            return None
-        else:
+        if key in self.cache_data and key is not None:
             return self.cache_data[key]
+        else:
+            return None
