@@ -4,7 +4,7 @@ from base_caching import BaseCaching
 
 
 class BasicCache(BaseCaching):
-
+    """A basic caching system that does not have limit"""
     def put(self, key, item):
         """
         assign to the dictionary self.cache_data the item
