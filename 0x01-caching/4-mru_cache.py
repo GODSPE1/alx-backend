@@ -17,7 +17,7 @@ class MRUCache(BaseCaching):
         If the cache is full, discard the most recently used
         item (MRU algorithm).
         """
-        if key is None or item is None:
+        if key is None and item is None:
             return
         if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
             if key in self.cache_data:
