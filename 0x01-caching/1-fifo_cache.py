@@ -16,7 +16,7 @@ class FIFOCache(BaseCaching):
         Assign the item value to the key in the cache data dictionary.
         If the cache is full, discard the oldest item (FIFO algorithm).
         """
-        if key is not None or item is not None:
+        if key is not None and item is not None:
             if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
                 discard = next(iter(self.cache_data))
                 del self.cache_data[discard]
