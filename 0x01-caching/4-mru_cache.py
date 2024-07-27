@@ -7,8 +7,6 @@ from base_caching import BaseCaching
 class MRUCache (BaseCaching):
     """ MRUCache defines a MRU caching system """
 
-
-
     def put(self, key, item):
         """ Add an item in the cache """
         if key is None or item is None:
