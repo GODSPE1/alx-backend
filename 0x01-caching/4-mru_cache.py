@@ -1,29 +1,37 @@
-#!/usr/bin/env python3
-"""This module defines an MRUCache class algorithm implementation"""
+#!/usr/bin/python3
+""" MRUCache module
+"""
 from base_caching import BaseCaching
 
 
-class MRUCache(BaseCaching):
-    """A basic caching system that follows the MRU algorithm"""
-    def __init__(self):
-        """Initialize the MRUCache class by calling the parent
-        class's __init__ method"""
-        super().__init__()
+class MRUCache (BaseCaching):
+    """ MRUCache defines a MRU caching system """
+
+
 
     def put(self, key, item):
-        """discard the most recently used item (MRU algorithm)."""
-        if key is not None or item is not None:
-            if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-                if key not in self.cache_data:
-                    discard = next(reversed(self.cache_data))
-                    del self.cache_data[discard]
-                    # removed = self.cache_data.popitem()
-                    print("DISCARD:", discard)
+        """ Add an item in the cache """
+        if key is None or item is None:
+            return
+
+        if key in self.cache_data:
+            self.cache_data.pop(key)
             self.cache_data[key] = item
+            return
+
+        if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
+            # Pop the first item (FIFO)
+            most_recent_used_key = self.cache_data.popitem()[0]
+            # self.cache_data.pop(least_used_key)
+            print(f"DISCARD: {most_recent_used_key}")
+
+        self.cache_data[key] = item
+        # self.order.append(key)
 
     def get(self, key):
-        """Return the value associated with the given key data dictionary"""
-        if key in self.cache_data and key is not None:
-            return self.cache_data[key]
-        else:
+        """ Get an item by key """
+        if key is None or key not in self.cache_data:
             return None
+        val = self.cache_data.pop(key)
+        self.cache_data[key] = val
+        return self.cache_data[key]
