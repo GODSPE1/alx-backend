@@ -4,7 +4,7 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route("/", strict_slashes=False)
 def index():
     """simply outputs “Welcome to Holberton” as page title (<title>)
     and “Hello world” as header (<h1>"""
@@ -12,4 +12,4 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
